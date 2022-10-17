@@ -1,6 +1,10 @@
 package com.meituan.demo.controller;
 
 import com.meituan.demo.bean.VideoListEntity;
+import com.meituan.demo.domain.GeneralResult;
+import com.meituan.demo.domain.PatrolplaceListQuery;
+import com.meituan.demo.domain.Result;
+import com.meituan.demo.domain.bo.PageBO;
 import com.meituan.demo.server.VideoListService;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -22,10 +26,12 @@ public class VideoListController {
     @ResponseBody
     @ApiImplicitParams({
     })
-    public List<VideoListEntity> getVideoList() {
-        List<VideoListEntity> videoListEntityList = videoListService.getVideoList();
-        System.out.println("" + videoListEntityList.get(0).getVideolistimageurl());
-        return videoListEntityList;
-    }
+    public Result getVideoList(PatrolplaceListQuery patrolplaceListQuery) {
 
+        GeneralResult generalResult = new GeneralResult();
+        PageBO<VideoListEntity> systemUserList = videoListService.getVideoList(patrolplaceListQuery);
+        generalResult.setData(systemUserList);
+        generalResult.setCode(00);
+        return generalResult;
+    }
 }

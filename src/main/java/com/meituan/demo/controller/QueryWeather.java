@@ -20,7 +20,7 @@ public class QueryWeather {
     @Autowired
     RestTemplate restTemplate;
 
-    @RequestMapping(value = "/get/{city}", method = RequestMethod.GET)
+    @RequestMapping(value = "/get/{city}",produces = "application/json; carset=utf-8", method = RequestMethod.GET)
     public String extern(@PathVariable("city") String city) {
         String apiURL = "http://wthrcdn.etouch.cn/weather_mini?city=" + city;
         ResponseEntity<String> responseEntity = restTemplate.getForEntity(apiURL, String.class);
