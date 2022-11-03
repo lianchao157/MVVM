@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.meituan.demo.mapper.LogRemberTime_Mapper">
+    <insert id="insertlogintime" parameterType="java.util.List">
+        INSERT INTO createlogintime (loginno, lgcustomer, logintime)
+        VALUES (
+            NULL,
+            #{lgcustomer},
+            CURRENT_TIMESTAMP
+        )
+    </insert>
+
+
+    <select id="resultdata" parameterType="java.lang.String" resultType="com.meituan.demo.bean.CreateLoginTime">
+
+        SELECT *
+        FROM createlogintime WHERE (lgcustomer= #{lgcustomer})ORDER BY logintime DESC
+    </select>
+</mapper>
+        <!--on DUPLICATE key update userid=userid+values(userid) -->

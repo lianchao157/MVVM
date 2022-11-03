@@ -3,6 +3,7 @@ package com.meituan.demo.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.meituan.demo.bean.User;
 import com.meituan.demo.server.LoginByTokenService;
+import com.meituan.demo.server.LoginRemberService;
 import com.meituan.demo.server.UserService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -25,6 +26,8 @@ public class LoginByTokenController {
     private LoginByTokenService tokenService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private LoginRemberService loginRemberService;
 //    @Autowired
 //    TokenService tokenService;
 
@@ -52,8 +55,7 @@ public class LoginByTokenController {
     public Object login(User user) {
         JSONObject jsonObject = new JSONObject();
         User userForBase = userService.findByUsername(user);
-        userForBase.setUsername("3");
-        userForBase.setUsertel("3");
+
         if (userForBase == null) {
             jsonObject.put("message", "登录失败,用户不存在");
             return jsonObject;
@@ -63,10 +65,11 @@ public class LoginByTokenController {
                 jsonObject.put("message", "登录失败,密码错误");
                 return jsonObject;
             } else {
-                String token = tokenService.getToken("3", "3");
+                String token = tokenService.getToken(user.getUsername(), user.getUsertel());
                 jsonObject.put("token", token);
                 jsonObject.put("user", userForBase);
                 System.out.println("数据员" + jsonObject);
+                loginRemberService.LoginRember(user.getUsername());
                 return jsonObject;
             }
         }
@@ -78,5 +81,7 @@ public class LoginByTokenController {
         System.out.println("要验证的数据");
         return "你已通过验证";
     }
+
+
 }
 //Error:java: source level should be comprised in between '1.3' and '1.9' (or '5', '5.0', ..., '9' or '9.0'): 10

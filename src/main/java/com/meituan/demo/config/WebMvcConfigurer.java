@@ -1,8 +1,12 @@
 package com.meituan.demo.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+
+import java.util.List;
 
 @Configuration
 public class WebMvcConfigurer extends WebMvcConfigurationSupport {
@@ -22,4 +26,17 @@ public class WebMvcConfigurer extends WebMvcConfigurationSupport {
                 "classpath:/META-INF/resources/webjars/");
         super.addResourceHandlers(registry);
     }
+
+//    @Override
+//    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+//        // 解决（配置文件属性值）中文乱码问题
+//        converters.add(responseBodyConverter());
+//        // 需要重新配置json转换器
+//        converters.add(mappingJackson2HttpMessageConverter());
+//    }
+//
+//    @Override
+//    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+//        configurer.favorPathExtension(false);
+//    }
 }

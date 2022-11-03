@@ -48,5 +48,100 @@ close以什么结束，
 原文链接：https://blog.csdn.net/sz15732624895/article/details/82892283
 
 
+插入全部字段方式二：
+
+insert into dbo.TEST values(108,N'张三',N'女',18,N'中国天津',1),(109,N'李四',N'男',33,N'中国天津',2),(110,N'王五',N'女',25,N'中国天津',1),(111,N'赵六',N'男',32,N'中国天津',1)
+————————————————
+版权声明：本文为CSDN博主「adobehu」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/huzecom/article/details/103254074
+
+
+2  2022.11.3
+https://blog.csdn.net/huzecom/article/details/103254074
+使用truncate删除表中所有记录
+truncate和delete的区别：
+
+truncate:删除表中的内容，不删除表结构，释放空间
+   truncate table dbo.TEST
+   查询bettun
+   select   *form
+   dbo.Test
+    where age in(18,30)
+    in 表示或者的关系
+
+between ..and 表示在两个数之间
+select * from dbo.TEST where age between 18 and 30 ;
+SELECT   *  from createlogintime  where logintime between '2022-11-02 10:31:32' AND '2022-11-03'
+
+
+select   age+5 from dbo.TEST where id=1;
+
+某列数据和其他列数据参与运算
+
+select   age+id from dbo.TEST where id=1;
+
+% 匹配任意多个字符串 _ 匹配一个字符
+
+select * from dbo.TEST where name like N'张%';
+————————————————
+版权声明：本文为CSDN博主「adobehu」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/huzecom/article/details/103254074
+
+
+
+聚合函数：
+
+统计个数
+
+select count(*) from dbo.TEST;
+
+求平均
+
+select avg(age) as '年龄' from dbo.TEST;
+
+求和
+
+select sum(age) as '年龄总和' from dbo.TEST;
+
+最大值
+
+select max(age) as '最大值' from dbo.TEST;
+
+最小值
+
+select min(age) as '最小值' from dbo.TEST;
+
+清除重复值
+
+select   distinct address  from dbo.TEST;
+
+
+
+      -- 使用内连接查询
+
+select * from emp inner join dept on emp.dept_id=dept.id;
+
+-- 使用左外连接查询
+
+select * from dept left outer join emp on dept.id=emp.dept_id
+————————————————
+版权声明：本文为CSDN博主「adobehu」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：
+
+
+   格式：SELECT 字段名 FROM 左表 RIGHT [OUTER ]JOIN 右表 ON 条件
+
+
+   子查询结果的三种情况：
+
+   子查询的结果是单行单列
+
+      子查询结果只要是单行单列，肯定在 WHERE 后面作为条件，父查询使用：比较运算符，如：> 、<、<>、 = 等
+
+               格式：SELECT 查询字段 FROM 表 WHERE 字段=（子查询）;
+
+
+
+
 
 spring boot 四大特性

@@ -92,7 +92,8 @@ public class User {
 }
 
 
-校验规则和错误提示信息配置完毕后，接下来只需要在接口需要校验的参数上加上@Valid注解，并添加BindResult参数即可方便完成验证：
+校验规则和错误提示信息配置完毕后，接下来只需要在接口需要校验的参数上加上@Valid注解，
+并添加BindResult参数即可方便完成验证：
 @RestController
 @RequestMapping("user")
 public class UserController {
@@ -160,3 +161,5 @@ qualsAndHashCode注解的作用就是自动实现model类的equals方法和hashc
     
     https://blog.csdn.net/weixin_43314519/article/details/115152850
     sppringboot   d多模块项目部署 
+    
+    实现 

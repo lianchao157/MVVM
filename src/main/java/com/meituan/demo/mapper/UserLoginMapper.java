@@ -11,5 +11,8 @@ public interface UserLoginMapper {
     User findByUsernametest(@Param("username") String username);//  查询所有
 
 
+    User InserintoUserteset(@Param("username")String  username,@Param("password")String password);
+
+
 
 }
