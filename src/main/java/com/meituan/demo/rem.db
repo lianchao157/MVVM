@@ -142,6 +142,34 @@ select * from dept left outer join emp on dept.id=emp.dept_id
 
 
 
+拒绝权限操作——deny
 
+  例：禁止名称为guest的用户对stu_info表的操作更新权限
+DENY UPDATE ON stu_info TO guest CASCADE
+收回权限操作——revoke
+
+例：收回guest用户对stu_info的删除权限
+REVOKE DELETE ON stu_info FROM guest
+
+
+2022.11.4
+更改github  的提交地址
+https://blog.csdn.net/weixin_41719046/article/details/108247522
+返回web页面的操作
+        ————————————————
+        原文链接：https://blog.csdn.net/qq_42310433/article/details/89161413
+            @RequestMapping("/Index")
+
+
+
+       2022.11.8
+
+
+
+打jar 包遇到的问题
+	https://blog.csdn.net/weixin_44783287/article/details/90678072
+
+
+	https://www.jb51.net/article/211950.htm
 
 spring boot 四大特性

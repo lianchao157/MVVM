@@ -216,3 +216,39 @@ value="该参数无意义，在UI界面上看不到，不需要配置"
 ————————————————
 版权声明：本文为CSDN博主「天黑请赶路」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
 原文链接：https://blog.csdn.net/weixin_42468607/article/details/115715021
+2022.11.7
+返回给Android 一个网页
+  
+  sql  查询的应用
+  https://blog.csdn.net/huzecom/article/details/103254074?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-1-103254074-blog-121772040.pc_relevant_3mothn_strategy_and_data_recovery&spm=1001.2101.3001.4242.2&utm_relevant_index=4
+ 
+ 启镱圣洪福 永学宝德清 殿臣树风久 家国世文明 兴宗先兆如长
+ 辽宁
+ 
+ 1、朝阳：启镱圣洪福 永学宝德清 殿臣树风久 家国世文明 兴宗先兆如长
+ 含墨书山振万邦
+ http://www.360doc.com/content/21/0317/19/31463172_967480185.shtml
+ 
+ 
+2022. 11.9v1  图片存放
+  -----------------------------------
+        <!--SpringBoot上传图片-->
+        <!--https://blog.51cto.com/u_15466961/5275011-->
+        
+        解决
+        Error:java: target level should be comprised in between '1.1' and '1.9' (or '5', '5.0', ..., '9' or '9.0') or cldc1.1: 11
+        https://blog.csdn.net/LG_49/article/details/77936945?spm=1001.2101.3001.6650.2&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-2-77936945-blog-82262798.pc_relevant_3mothn_strategy_and_data_recovery&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-2-77936945-blog-82262798.pc_relevant_3mothn_strategy_and_data_recovery&utm_relevant_index=3
+        
+        
+        
+        
+2022.11.10  8
+导出文件sprinboot   简书https://www.jianshu.com/p/69a0a55ac300        
+
+
+
+面试 知识点
+https://blog.csdn.net/wo_ha
+android  的
+
+下载文件乱码问题  存放

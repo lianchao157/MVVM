@@ -7,11 +7,9 @@ import cn.afterturn.easypoi.view.PoiBaseView;
 import cn.hutool.http.HttpUtil;
 import com.meituan.demo.bean.DataOrderQueryReq;
 import com.meituan.demo.bean.Member;
+import com.meituan.demo.bean.User;
 import com.meituan.demo.bean.UserEx;
-import com.meituan.demo.server.ExcelService;
-import com.meituan.demo.server.LoginByTokenService;
-import com.meituan.demo.server.OperateReadPoiService;
-import com.meituan.demo.server.ResultService;
+import com.meituan.demo.server.*;
 import com.meituan.demo.server.impl.resul;
 import com.meituan.demo.utils.LocalJsonUtil;
 import com.meituan.demo.utils.PoiUtils;
@@ -19,7 +17,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.jdbc.Null;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.ss.util.RegionUtil;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -55,6 +56,8 @@ import java.util.List;
 @RestController
 @RequestMapping("api")
 public class ExcelController {
+    @Autowired(required = true)
+    public StudentService studentService;
     @Autowired(required = true)
     public ExcelService mExcelService;
 
@@ -177,6 +180,8 @@ public class ExcelController {
         return wb;
     }
 
+
+//   无法打开文档本地文档
     @Controller
     @Api(tags = "EasyPoiController", description = "EasyPoi导入导出测试")
     @RequestMapping("/easyPoi")
@@ -209,8 +214,7 @@ public class ExcelController {
      */
     @Autowired
     private resul resultService;
-    @ApiOperation(value = "exportResultxz")
-    @GetMapping("/export")
+    @GetMapping(value = "/export")
     public void exportResult(HttpServletResponse response) throws IOException {
         Workbook wb = resultService.exportToExcel();
         OutputStream output = response.getOutputStream();
@@ -220,7 +224,7 @@ public class ExcelController {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        response.setHeader("Content-disposition", "attachment;filename=" + fileName + ";" + "filename*=utf-8''" + fileName);
+        response.setHeader("Content-disposition", "attachment;filename=" + fileName +"张三"+ ";" + "filename*=utf-8''" + fileName);
         wb.write(output);
         output.close();
     }
@@ -231,20 +235,39 @@ public class ExcelController {
 //代码链接
 //    https://gitee.com/yin-kun-peng/poi-export-data-as-excel-p/blob/master/src/main/java/cn/ykp/entity/Teacher.java
 
-
+//乱码  打不开
 //    代码
     @Autowired
     private OperateReadPoiService operateReadPoiService;
     @ApiOperation(value = "downLoadExcel11111111111111111111111111111")
-    @RequestMapping(value = "/downLoadExcel")
+    @RequestMapping(value = "/downLoadExcel",method = RequestMethod.GET)
     public void  downLoadExcel(HttpServletResponse response) throws IOException {
         operateReadPoiService.downLoadExcel(response);
+        System.out.println("downLoadExcel11111111111111111111111111111");
     }
+
+
+
 
     @ApiOperation(value = "testDownLoadExcel")
     @RequestMapping("/testDownLoadExcel")
     public String  downLoadExcel(){
         return "testDownLoadExcel";
+    }
+
+
+
+
+
+//    b包含了导入功能
+//    https://github.com/allanzhuo/myport/blob/master/src/main/java/com/allan/service/impl/StudentServiceImpl.java
+    @RequestMapping(value="/exportExcel存放",method=RequestMethod.GET)
+    public void exportExcel(HttpServletResponse response) {
+        try {
+            studentService.exportExcel(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

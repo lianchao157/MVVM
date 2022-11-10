@@ -157,8 +157,20 @@
             <artifactId>poi-ooxml</artifactId>
             <version>3.17</version>
         </dependency>
+<!--https://www.jianshu.com/p/98ed03044fe1-->
+        <!-- poi-tl基于poi的word模板引擎 -->
+        <dependency>
+            <groupId>com.deepoove</groupId>
+            <artifactId>poi-tl</artifactId>
+            <version>1.5.0</version>
+        </dependency>
         <!--原文链接：https://blog.csdn.net/u014508939/article/details/121809564-->
-
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>3.0.5</version>
+        </dependency>
+        <!--https://blog.csdn.net/qq_29752857/article/details/122237809-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -177,6 +189,28 @@
             <artifactId>excel-util</artifactId>
             <version>1.2.4</version>
         </dependency>
+
+        <!--导入html依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <!-- 文件图片存放-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.12</version>
+            <scope>compile</scope>
+        </dependency>
+
+
+
+
     </dependencies>
 
 

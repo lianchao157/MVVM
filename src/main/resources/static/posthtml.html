@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>input 表单元素</title>
+</head>
+<body>
+<form>
+    <!--text 文本框 用户可以在里面输入任何内容-->
+    用户名：<input type="text" name="user" value="请输入用户名">   <br>   <!--<br>为换行-->
+    <!-- password为定义密码段，该字段中字符被掩码，用户看不到其中的信息 -->
+    密码：<input type="password" value="请输入密码">  <br>
+    <!-- radio为单选按钮 可以实现多选一 -->
+    <!-- 在radio中想实现多选一必须取相同的name -->
+    性别：男<input type="radio" name="sex" value="男">女<input type="radio" name="sex" value="女 "><br>
+    <!-- checkbox为复选框，可以选取多个 -->
+    爱好：摸鱼<input type="checkbox">摸大鱼<input type="checkbox"><br>
+    <!-- submit为提交按钮，把信息提交到后台 -->
+    <input type="submit" value="免费注册"><br>
+    <!-- rext为重置按钮，重新填写信息 -->
+    <input type="reset" value="新设置"><br>
+    <!-- file用于用户自己上传文件 -->
+    上传文件<input type="file">
+</form>
+</body>
+</html>
