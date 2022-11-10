@@ -30,9 +30,11 @@ gitee:
 # spring:
 #  profiles:  prod
 #---
+file-save-path: D://html//
 mybatis:
   #mapper-locations : classpath*:cn/**/*.xml
   #指向mapper的xml文件位置
   mapper-locations: classpath:mapper/*Mapper.xml
+
 
 
