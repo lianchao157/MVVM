@@ -110,17 +110,19 @@ public class LoginByTokenController {
     @ResponseBody
     @ApiImplicitParams({
     })
-    public GeneralResult selectAll(User user) {
+    public GeneralResult regin(User user) {
+        System.out.println("我这走注册信息+regin");
+        System.out.println("我这走注册信息+regin"+user.getUsertel()+user.getUsername());
         GeneralResult GeneralResult = new GeneralResult();
         boolean userlistall = reginService.UserReginService(user);
         if (userlistall) {
 
             GeneralResult.setMsg("成功");
-            GeneralResult.setData(userlistall);
+            GeneralResult.setData("");
             return GeneralResult;
         } else {
             GeneralResult.setMsg("失败");
-            GeneralResult.setData(null);
+            GeneralResult.setData("");
             return GeneralResult;
         }
     }

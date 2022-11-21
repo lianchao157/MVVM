@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.meituan.demo.mapper.ReginUser_Mapper">
+    <insert id="Regin" parameterType="java.lang.String" >
+      INSERT  INTO userinfobyweb (username,usertel)VALUES(  #{username},#{usertel})
+    </insert>
+    <select id="seletc" parameterType="java.lang.String">
+        select * from   userinfobyweb WHERE username=#{username} and  usertel=#{usertel}
+    </select>
+
+</mapper>
+        <!--on DUPLICATE key update userid=userid+values(userid) -->
