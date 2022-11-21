@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>layarea</title>
+    <script src="js/layui/layui.js"></script>
+    <link rel="stylesheet" href="js/layui/css/layui.css">
+</head>
+<body>
+<div class="layui-form">
+    <P>阿里巴巴(1688.com)批发网是全球企业间(B2B)电子商务的著名品牌，为天下网商提供海量商机信息和便捷安全的在线交易市场。
+        从海量的商品中甄选热销新品、优质好商，为买家采购批发提供风向标。优质折扣货源，爆款清仓开抢，进货更省心，
+        采购批发就上阿里巴巴！</P>
+</div>
+
+<script>
+    layui.config({
+        base: './mods/'
+        , version: '1.0'
+    });
+    layui.use(['layer', 'form', 'layarea'], function () {
+        var layer = layui.layer
+            , form = layui.form
+            , layarea = layui.layarea;
+
+        layarea.render({
+            elem: '#area-picker',
+            change: function (res) {
+                //选择结果
+                console.log(res);
+            }
+        });
+    });
+</script>
+</body>
+</html>
