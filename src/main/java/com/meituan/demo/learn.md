@@ -222,6 +222,589 @@ value="该参数无意义，在UI界面上看不到，不需要配置"
   sql  查询的应用
   https://blog.csdn.net/huzecom/article/details/103254074?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-1-103254074-blog-121772040.pc_relevant_3mothn_strategy_and_data_recovery&spm=1001.2101.3001.4242.2&utm_relevant_index=4
  
+ 2022.11.21  sql 语句  类型
+ tinyint 十分小的数据 1个字节
+ smallint 较小的数据 2个字节
+ mediumint 中等大小的数据 3个字节
+ int 标准的整数 4个字节 常用的
+ bigint 较大的数据 8个字节
+ float 浮点数 4个字节
+ double 浮点数 8个字节
+ decimal 字符串形式的浮点数 金融计算的时候 一般用decimal
+ ————————————————
+ 原文链接：https://blog.csdn.net/wudidahuanggua/article/details/125351062
+ 
+ 
+ 字符串和文本
+ char 字符串固定大小 0~255
+ varchar 可变字符串大小 0~65535 对应String
+ tinytest 微型文本 2^8-1
+ test 文本串 2^16 -1 保存大文本
+ 
+ 时间 日期
+ data YYYY-MM-DD，日期格式
+ 
+ time HH:mm:ss
+ datetime YYYY-MM-DD HH:mm:ss 最常用的时间格式
+ timestamp 时间戳 1970.1.1到现在的毫秒数 较为常用
+ year 年份标识
+ 
+ 
+CREATE TABLE IF NOT EXISTS `student`(
+  `id` INT(4) NOT NULL AUTO_INCREMENT COMMENT '学号',
+  `name` VARCHAR(30) NOT NULL DEFAULT'匿名' COMMENT'姓名',
+  `paw` VARCHAR(20) NOT NULL DEFAULT'123456' COMMENT'密码',
+  `sex` VARCHAR(2) NOT NULL DEFAULT'女' COMMENT'性别',
+  `birthday` DATETIME DEFAULT NULL COMMENT'出生日期',
+  `address` VARCHAR(100) DEFAULT NULL COMMENT'家庭住址',
+  `email` VARCHAR(50) DEFAULT NULL COMMENT'邮箱',
+  PRIMARY KEY (`id`)
+)ENGINE=INNODB DEFAULT CHARSET=utf8
+create table [if not exists] `表名`(
+  `字段名` 列表名 [属性] [索引] [注释],
+  `字段名` 列表名 [属性] [索引] [注释],
+  ......
+  `字段名` 列表名 [属性] [索引] [注释]
+)[表类型][字符设置][注释]
+  ————————————————
+  原文链接：https://blog.csdn.net/wudidahuanggua/article/details/125351062
+  
+  
+  show create database school  -- 查看创造数据库的语句
+  show create table student -- 查看student数据表定义的语句
+  desc student -- 显示表的结构
+  
+  
+  数据表的类型
+  -- 关于数据库引擎
+  /*
+  INNODB 默认使用
+  MYISAM 早些年用的
+  */
+ 
+ 
+ MYISAM 节约空间，速度较快
+ INNODB 安全性高，事务的处理，多表多用户操作
+ 
+ 
+ 修改表明  aleter table 旧的名REnAME AS   新表名
+ 
+ ALTER TABLE teacher RENAME AS teacher1
+ -- 增加表的字段 ALTER TABLE 表名 ADD 字段名 列属性
+ ALTER TABLE teacher1 ADD age INT(11)
+ -- 修改表的字段（重命名，修改约束）
+ -- ALTER TABLE 表名 MODIFY 字段名 列属性[]
+ ALTER TABLE teacher1 MODIFY age VARCHAR(11) -- 修改约束
+ -- ALTER TABLE 表名 CHANGE 旧名字 新名字 列属性[]
+ ALTER TABLE teacher1 CHANGE age age1 INT(11) -- 重命名，
+  
+ -- 删除表的字段 表名 ALTER TABLE 表名 DROP 字段名
+ ALTER TABLE teacher1 DROP age1
+ 
+ ————————————————
+ -- 删除表 DROP TABLE 表名(如果表存在再删除)
+ DROP TABLE [if exists] teacher1
+ 
+ insert
+ 
+ 语法：INSERT INTO 表名 ([列1],[列2],[列3]) VALUES ('字段1','字段2','字段3'),('字段1','字段2','字段3')
+ 
+ -- 一般写插入语句，我们一定要数据和字段一一对应！
+ -- INSERT INTO 表名 ([列1],[列2],[列3]) VALUES ('字段1','字段2','字段3'),('字段1','字段2','字段3')
+ INSERT INTO grade (gradename) VALUES ('大二'),('大三')
+ ————————————————
+ 版权声明：本文为CSDN博主「毫无感情的dj」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+ 
+ 
+ update 修改谁 （条件） set原来的值=新值
+ 
+ -- 修改学院名字，带了简介
+ UPDATE `student` SET `name`='狂神'WHERE id=1;
+  
+ -- 不指定条件的情况下，会改动所有的值
+ UPDATE `student` SET `name`='长江7号'
+  
+ -- 语法：
+ 
+ ————————————————
+ 
+ 
+ --  删除数据（避免这样写，会全部删除）
+ delete from `student`
+  
+ -- 删除指定数据
+ delete from `student` where id=1;
+ 
+ 
+ TRUNCATE命令
+ 
+ 作用：完全清空数据库，表的结构和索引约束不会变！
+ 
+ -- 清空student表
+ TRUNCATE `student`
+ delete和TRUNCATE不同
+ 
+ 不同
+ TRUNCATE 重新设置自增列 计数器会归零
+ TRUNCATE 不会影响事务
+ DELETE FROM `test` -- 不会影响自增
+ TRUNCATE TABLE `table` -- 自增会归零
+ ————————————————
+ 
+-- 查询全部的学生 select 字段 from 表
+SELECT * FROM student
+ 
+-- 查询指定字段
+SELECT `studentno`,`studentname` FROM student 
+ 
+-- 别名，给结果起一个名字 AS
+SELECT `studentno` AS 学号,`studentname`
+AS 学生姓名 FROM student -- 表也可以加AS 给表起一个别名
+ 
+-- 函数 concat(a,b)
+SELECT CONCAT('姓名：',studentname) AS 新名字 FROM student
+————————————————
+版权声明：本文为CSDN博主「毫无感情的dj」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+
+ 
+-- 查询一下有哪些同学参加了考试
+SELECT * FROM result -- 查询全部的考试成绩
+SELECT `studentno` FROM result 
+-- 去重复
+SELECT DISTINCT `studentno` FROM result 
+ 
+SELECT VERSION() -- 查询系统版本(函数)
+ 
+SELECT 100*3-1 AS 计算结果 -- 用来计算(表达式)
+ 
+SELECT @@auto_increment_increment  -- 查询自增的步长（变量）
+————————————————
+ 
+ -- 模糊查询
+ -- like结合 %(代表0到人一个字符) _(代表一个字符)
+ -- in(具体的一个值或者多个值)
+  -----------------------------------------------
+ -- 联表查询 join  
+ -- join（连接的表） on（判断的条件） 连接查询
+ -- where 等值查询
+ SELECT s.studentno,studentname,subjectno,studentresult
+ FROM student AS s
+ INNER JOIN result AS r
+ WHERE s.studentno = r.studentno
+ ————————————————
+ 版权声明：本文为CSDN博主「毫无感情的dj」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+ 
+ 
+ 
+ /*
+ 1. 分析需求，分析查询的字段来自哪些表
+ 2.确定使用哪种连接查询？7种
+ 确定交叉点（这两个表中哪个数据是相同的）
+ 判断的条件： 学生表中 studentNo = 成绩表中 studentNo 
+ */
+  
+ -- JION（表） ON （判断的条件）连接查询
+ -- where 等值查询
+ SELECT studentNo,studentName,SubjectNo,StudentResult
+ FROM student AS s
+ INNER JOIN result AS r
+ WHERE s.studentNo=r.studentNo
+  
+ --Right Join
+ SELECT s.studentNo,studentName,SubjectNo,StudentResult
+ FROM student AS s
+ RIGHT JOIN result AS r
+ ON s.studentNo = r.studentNo
+  
+ --LEFT Join
+ SELECT s.studentNo,studentName,SubjectNo,StudentResult
+ FROM student AS s
+ LEFT JOIN result AS r
+ ON s.studentNo = r.studentNo
+  
+ 
+ ————————————————
+ 版权声明：本文为CSDN博主「毫无感情的dj」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+ 原文链接：https://blog.csdn.net/wudidahuanggua/article/details/125351062
+ 
+ 
+ -- 查询父子信息
+  
+ SELECT a.`categroryName` AS `父栏目`,b.`categroryName` AS `子栏目`
+ FROM `catgroy` AS a,`catgroy` AS b
+ WHERE a.`categoryid`=b.`pid`
+ 
+ 
+ 
+ 
+  为什么要分页
+ -- 缓解数据库压力，给人的体验更好
+  
+  分页和排序
+ -- 分页，每页显示五条数据
+  
+ -- 语法： limit 当前页，页面的大小
+ -- limit 0,5 1-5
+ -- limit 1,5 1-5
+ -- limit 6,5
+ SELECT s.`StudentNo`,`StudentName`,`SubjectName`,`StudentResult`
+ FROM student s
+ INNER JOIN `result` r
+ ON s.`StudentNo`=r.`StudentNo`
+ INNER JOIN `subject` sub
+ ON r.`subjectNo`=sub.`subjectNo`
+ WHERE subjectName='数据结构-1'
+ ORDER BY StudentResult ASC
+ LIMIT 0,5
+  
+ -- 第一页 limit 0,5
+ -- 第二页 limit 5,5
+ -- 第三页 limit 10,5
+ 
+ ————————————————
+ 版权声明：本文为CSDN博主「毫无感情的dj」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+ 原文链接：https://blog.csdn.net/wudidahuanggua/article/details/125351062
+ 
+ 
+ where (这个值是计算出来的)
+ 本质：在where语句中嵌套一个子查询语句
+ 
+ 
+ 
+ 
+ -- 1.查询 数据库结构-1的所有考试结构（学号，科目编号，成绩） 降序
+ -- 方式一： 连接查询
+ SELECT `StudentNo`,r.`SubjectName`,`StudentResult`
+ FROM `result` r
+ INNER JOIN `subject` sub
+ ON r.SubjectNo = sun.SubjectNo
+ WHERE subjectName = '数据库结构-1'
+ ORDER BY StudentResult DESC
+  
+ -- 方式二：使用子查询(由里及外)
+ SELECT `StudentNo`,r.`SubjectName`,`StudentResult`
+ FROM `result`
+ WHERE StudentNo=(
+ 	SELECT SubjectNo FROM  `subject` 
+     WHERE SubjectName = '数据库结构-1'
+ )
+ ORDER BY StudentResult DESC
+  
+  
+ -- 分数不少于80分的学生的学号和姓名
+ SELECT DISTINCT s.`StudentNo`,`StudentName`
+ FROM student s
+ INNER JOIN result r
+ ON r.StudentNo = s.StudentNo
+ WHERE StudentResult>=80
+  
+ -- 在这个基础上 增加一个科目 ，高等数学-2
+ SELECT DISTINCT s.`StudentNo`,`StudentName`
+ FROM student s
+ INNER JOIN result r
+ ON r.StudentNo = s.StudentNo
+ WHERE StudentResult>=80 AND `SubjectNo`=(
+     SELECT Subject FROM `subject`
+     WHERE SubjectName='高等数学-2'
+ )
+  
+ -- 查询课程为 高等数学-2 且分数不小于80分的同学的学号和姓名
+ SELECT s.`StudentNo`,`StudentName`
+ FROM student s
+ INNER JOIN result r
+ ON s.StudentNo = r.StudentNo
+ INNER JOIN `subject` sub
+ ON r.`SubjectName`='高等数学-2'
+ WHERE `SubjectaName`='高等数学-2' AND StudentResult >=80
+  
+  
+ -- 再改造 (由里即外)
+ SELECT `StudentNo`,`StudentName` FROM student
+ WHERE StudentNo IN(
+ SELECT StudentNo result WHERE StudentResult >80 AND SubjectNo =(
+ SELECT SubjectNo FROM `subject` WHERE `SubjectaName`='高等数学-2'
+ )
+ )
+ 
+ ————————————————
+ 版权声明：本文为CSDN博主「毫无感情的dj」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+ 原文链接：https://blog.csdn.net/wudidahuanggua/article/details/125351062
+ 
+ 
+ 
+ 
+ -- 查询不同课程的平均分，最高分，最低分，平均分大于80
+ -- 核心：（根据不同的课程分组）
+  
+ SELECT `SubjectName`,AVG(StudentResult),MAX(StudentResult)
+ FROM result r
+ INNER JOIN `Subject` sub
+ ON r.SubjectNo=sub.SubjectNo
+  
+ GROUP BY r.SubjectNo -- 通过什么字段来分组
+ HAVING AVG(StudentResult)>80
+ ————————————————
+ 原文链接：https://blog.csdn.net/wudidahuanggua/article/details/125351062
+ 常用函数
+ 
+ 
+ SELECT ABS(-8) -- 绝对值
+ SELECT CEILING(9.4) -- 向上取整
+ SELECT FLOOR(9.4)  -- 向下取整
+ SELECT RAND() -- 返回0-1随机数
+ SELECT SIGN(-10) -- 判断一个数的符号 0-0 负数返回-1 正数返回1
+  
+ -- 字符串函数
+ SELECT CHAR_LENGTH('2323232') -- 返回字符串长度
+ SELECT CONCAT('我','233') -- 拼接字符串
+ SELECT INSERT('java',1,2,'cccc') -- 从某个位置开始替换某个长度
+ SELECT UPPER('abc') 
+ SELECT LOWER('ABC')
+ SELECT REPLACE('坚持就能成功','坚持','努力')
+  
+ -- 查询姓 周 的同学 ，改成邹
+ SELECT REPLACE(studentname,'周','邹') FROM student
+ WHERE studentname LIKE '周%'
+  
+ -- 时间跟日期函数（记住）
+ SELECT CURRENT_DATE() -- 获取当前日期
+ SELECT CURDATE() -- 获取当前日期
+ SELECT NOW() -- 获取当前日期
+ SELECT LOCATIME()  -- 本地时间
+ SELECT SYSDATE()  -- 系统时间
+  
+ SELECT YEAR(NOW())
+ SELECT MONTH(NOW())
+ SELECT DAY(NOW())
+ SELECT HOUR(NOW())
+ SELECT MINUTE(NOW())
+ SELECT SECOND(NOW())
+  
+ -- 系统
+ SELECT SYSTEM_USER()
+ SELECT USER()
+ SELECT VERSION()
+ 原文链接：https://blog.csdn.net/wudidahuanggua/article/details/125351062
+ 2022.11.22
+ **MD5破解原理，背后有一个字典，MD5加密后的值，加密前的值**
+ 
+ CREATE TABLE `testmd5`(
+ `id` INT(4) NOT NULL,
+ `name` VARCHAR(20) NOT NULL,
+ `pwd` VARCHAR(50) NOT NULL,
+ PRIMARY KEY (`id`)
+  
+ )ENGINE=INNODB DEFAULT CHARSET=UTF8
+  
+  
+ -- 明文密码
+ INSERT INTO testmd5 VALUES(1,'张三','123456'),(2,'李四','123456'),(3,'王五','123456')
+  
+ -- 加密
+ UPDATE testmd5 SET pwd=MD5(pwd) WHERE id =1
+ UPDATE testmd5 SET pwd=MD5(pwd) WHERE id !=1  -- 加密全部
+  
+ -- 插入时加密
+  
+ INSERT INTO testmd5 VALUES(4,'小明',MD5('123456'))
+ INSERT INTO testmd5 VALUES(5,'红',MD5('123456'))
+  
+ -- 如何校验，将用户传递过来的密码，进行MD5加密，然后对比加密后的值
+ SELECT * FROM testmd5 WHERE `name`='红' AND pwd=MD5('123456')
+ ————————————————
+ 
+ 事务
+ 要么都成功要么都失败
+ 
+ 事务原则：ACID原则 原子性，一致性，隔离性，持久性
+ 
+ 
+ 
+ 
+ -- mysql 是默认开启事务自动提交的
+  
+ SET autocommit = 0; /* 关闭 */
+ SET autocommit = 1; /* 开启(默认的) */
+  
+ -- 手动处理事务
+ SET autocommit = 0; -- 先关闭自动条件
+ -- 事务开始
+ START TRANSACTION  -- 标记一个事物的开始，从这之后的sql都在一个事物内
+  
+  
+ -- 提交： 持久化（成功！）
+ COMMIT
+  
+ -- 回滚： 回到原来的样子（失败！）
+ ROLLBACK
+  
+ --事物结束
+ SET autocommit = 1; -- 结束后开启自动提交
+  
+ -- 了解
+ SAVEPOINT 保存点名  -- 设置一个事物的保存点
+ ROLLBACK SAVEPOINT -- 回滚到保存点
+ RELEASE SAVEPOINT -- 撤销保存点
+ 
+ 原文链接：https://blog.csdn.net/wudidahuanggua/article/details/125351062
+ 
+ 
+ 索引的分类
+ 主键索引 (PRIMARY KEY)
+ 
+ 主键不可重复
+ 唯一索引 (UNIQUE KEY)
+ 
+ 避免重复的列出现，唯一索引可以重复，多个列都可以标识位
+ 
+ 常规索引 （KEY/INEDEX）
+ 全文索引 FULLTEXT
+ 
+ SHOW INDEX FROM student  -- 显示所有的索引信息
+  
+ -- 增加一个全文索引 （索引名）列名
+ ALTER TABLE school.`student` ADD FULLTEXT INDEX `wuhu`(`studentname`)
+  
+ -- EXPLAIN 分析sql执行的状况
+ EXPLAIN SELECT * FROM student;  -- 非全文索引
+  
+ EXPLAIN SELECT * FROM student WHERE MATCH
+ ————————————————
+ 
+ 
+ 
+ SHOW INDEX FROM student  -- 显示所有的索引信息
+  
+ -- 增加一个全文索引 （索引名）列名
+ ALTER TABLE school.`student` ADD FULLTEXT INDEX `wuhu`(`studentname`)
+  
+ -- EXPLAIN 分析sql执行的状况
+ EXPLAIN SELECT * FROM student;  -- 非全文索引
+  
+ EXPLAIN SELECT * FROM student WHERE MATCH
+ ————————————————
+ 原文链接：https://blog.csdn.net/wudidahuanggua/article/details/125351062
+ 
+ 创建数据库
+ 
+ -- 创建用户
+ CREATE USER shijie IDENTIFIED BY '123456'
+  
+ -- 修改密码(修改当前用户密码)
+ SET PASSWORD = PASSWORD('123456')
+  
+ -- 修改密码（修改指定用户密码）
+ SET PASSWORD FOR shijie = PASSWORD('123456')
+  
+ -- 重命名  RENAME USER 原用户名 TO 新用户名
+ RENAME USER shijie TO shijie2
+  
+ -- 用户授权  GRANT ALL PRIVILEGES（全部权限）库.表 TO 用户
+ -- ALL PRIVILEGES 除了给别人授权，其他都能干
+ GRANT ALL PRIVILEGES *.* TO -- 全部库，全部表
+  
+ -- 查询权限 SHOW GRANTS FOR 用户
+ SHOW GRANTS FOR kuangshen -- 查看指定用户的权限
+ SHOW GRANTS FOR root@localhost -- root用户要加@地址
+  
+ -- 撤销权限 REVOKE 权限，在哪个库，哪个表撤销，给谁撤销
+ REVOKE ALL PRIVILEGES ON *.* FROM shijie
+  
+ -- 删除用户
+ DROP USER shijie 
+ ————————————————
+ 版权声明：本文为CSDN博主「毫无感情的dj」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+ 原文链接：https://blog.csdn.net/wudidahuanggua/article/details/125351062
+ 
+ 
+ 
+  MySQL备份
+  
+  MySQL数据库备份方式
+  
+  直接拷贝物理文件
+  
+  在可视化工具上导出
+  
+  使用命令行导出 mysqldump 命令行 cmd才叫命令行
+  
+  # mysqldump -h 主机 -u 用户名 -p密码 数据库 表 > 物理磁盘位置/文件名
+  # mysqldump -h 主机 -u 用户名 -p密码 数据库 表1 表2 表3 > 物理磁盘位置/文件名
+  # mysqldump -h 主机 -u 用户名 -p密码 数据库> 物理磁盘位置/文件名
+   
+  # 导入
+  # 登录的情况下，切换到指定的数据库
+  # source 备份文件
+  source d:a.sql
+  ————————————————
+  原文链接：https://blog.csdn.net/wudidahuanggua/article/details/125351062
+  
+  JDBC（重点）
+  jdbc
+  
+  创建测试数据库
+  
+  1、创建一个普通项目
+  
+  2、导入数据库驱动
+  
+  步骤总结：
+  
+  1、加载驱动
+  
+  2、链接数据库DriverManager
+  
+  3、执行sql的对象
+  
+  4、获得返回的结果集
+  
+  5、释放链接
+  
+  Connection connection = DriverManager.getConnection(url, username, password);
+  // 设置自动提交
+  // 事务提交
+  // 事务回滚
+  connection.setAutoCommit();
+  connection.rollback();
+  connection.commit();
+  ————————————————
+  版权声明：本文为CSDN博主「毫无感情的dj」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+  原文链接：https://blog.csdn.net/wudidahuanggua/article/details/125351062
+  
+  statement.executeQuery();//查询操作返回ResultSet
+  statement.execute();//执行任何sql
+  statement.executeUpdate();//更新、插入、删除都用这个，返回一个受影响的行数
+  
+  resultSet查询的结果集：封装了所有的查询结果
+  
+  resultSet.getObject();//不知道列类型用Object
+  resultSet.getString();//知道的时候用指定类型
+  resultSet.beforeFirst();// 移动到最前面
+  resultSet.afterLast();// 移动到最后面
+  resultSet.next(); //移动到下一个
+  resultSet.previous();//移动到前一行
+  resultSet.absolute();//移动到指定行
+  释放资源
+  
+  resultSet.close();
+  statement.close();
+  connection.close(); // 耗资源，用完关
+  ————————————————
+  版权声明：本文为CSDN博主「毫无感情的dj」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+  原文链接：https://blog.csdn.net/wudidahuanggua/article/details/125351062
+  
+  使用IDEA链接数据库
+  错误因为时区问题
+  
+  ?serverTimezone=GMT%2B8
+  
+  连接成功后，查看数据库
+
+ 
+ 
+ 
+ 
+ 
  启镱圣洪福 永学宝德清 殿臣树风久 家国世文明 兴宗先兆如长
  辽宁
  
@@ -252,3 +835,57 @@ https://blog.csdn.net/wo_ha
 android  的
 
 下载文件乱码问题  存放
+
+
+2022.11.16 
+parameterType属性用在哪里？为什么要使用这个属性？
+parameterType属性用在mapper.xml文件中的select标签，insert标签，update等标签中。
+确定的，比如条件，要插入的数据等。这些可以理解为就是参数。
+怎么把JAVA程序中的对象作为SQL语句中的参数呢？怎么传进去呢？也可以说，
+我们通过JAVA程序将参数传入到mapper.xml文件中的SQL语句里面
+
+2. @GetMapping：支持get请求方式，等同于RequestMapping(method=RequestMethod.GET)
+
+3. @PostMapping：支持post请求方式，等同于RequestMapping(method=RequestMethod.POST)
+
+4. @PutMapping：支持put请求方式，等同于RequestMapping(method=RequestMethod.PUT)
+
+5. @DeleteMapping：支持delete请求方式，等同于RequestMapping(method=RequestMethod.DELETE)
+
+6. @RestController：添加在类上，相当于同时在类上加了@Controller和@ResponseBody注解
+————————————————
+版权声明：本文为CSDN博主「Archer__13」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/Archer__13/article/details/126890628
+
+API（应用程序接口）：可以访问controller的url
+
+例如：传统架构：http://localhost:8080/user?name=Tom&age=20，则换成RESTful架构为：http://localhost:8080/user/Tom/20
+
+db2 的链接
+https://www.starxz.com/pjjc/7767.html
+
+
+
+
+
+2022.11.21
+狂神说java
+的java 配置
+https://blog.csdn.net/qq_48575500/article/details/125008623
+tag 的使用
+https://blog.csdn.net/weixin_40482816/article/details/123295563
+
+
+push tags
+不提交到远程仓库
+commit 的同时提交才勾选
+如果选all   不属于当前分支也会提交到远程仓库
+Current Branch，那么就只会提交当前分支的Tag。
+一般提交代码时，是不用勾选Push Tags的。
+
+https://www.cnblogs.com/Dr-Y/p/16196254.html
+create patch  创建补丁
+ 创建补丁
+从提交历史中创建
+在 git 日志中选择要创建补丁的commit，右键选择Create Patch...
+同一个文件在多次commit中都存在，取到的是最新的内容。
