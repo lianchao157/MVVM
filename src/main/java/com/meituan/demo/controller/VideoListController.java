@@ -30,8 +30,16 @@ public class VideoListController {
 
         GeneralResult generalResult = new GeneralResult();
         PageBO<VideoListEntity> systemUserList = videoListService.getVideoList(patrolplaceListQuery);
-        generalResult.setData(systemUserList);
-        generalResult.setCode(00);
+
+        if (null == systemUserList) {
+            generalResult.setData("");
+            generalResult.setCode(99);
+            generalResult.setMsg("返回失败");
+        } else {
+            generalResult.setData(systemUserList);
+            generalResult.setCode(00);
+            generalResult.setMsg("返回成功");
+        }
         return generalResult;
     }
 }
