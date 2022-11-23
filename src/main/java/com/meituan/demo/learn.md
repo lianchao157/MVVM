@@ -802,6 +802,45 @@ SELECT @@auto_increment_increment  -- 查询自增的步长（变量）
 
  
  
+ 适当的数据冗余
+ 适当拆分
+ 执行计划
+ explain select * from emp;
+ 
+ id:选择标识符
+ id
+ 
+ SELECT识别符。这是SELECT的查询序列号
+ 
+ 我的理解是SQL执行的顺序的标识，SQL从大到小的执行
+ 
+ id相同时，执行顺序由上至下
+ 
+ 如果是子查询，id的序号会递增，id值越大优先级越高，越先被执行
+ 
+ id如果相同，可以认为是一组，从上往下顺序执行；在所有组中，id值越大，优先级越高，越先执行
+ 
+ select_type:表示查询的类型。
+ (1) SIMPLE(简单SELECT，不使用UNION或子查询等)
+ 
+ (2) PRIMARY(子查询中最外层查询，查询中若包含任何复杂的子部分，最外层的select被标记为PRIMARY)
+ 
+ (3) UNION(UNION中的第二个或后面的SELECT语句)
+ 
+ (4) DEPENDENT UNION(UNION中的第二个或后面的SELECT语句，取决于外面的查询)
+ 
+ (5) UNION RESULT(UNION的结果，union语句中第二个select开始后面所有select)
+ 
+ (6) SUBQUERY(子查询中的第一个SELECT，结果不依赖于外部查询)
+ 
+ (7) DEPENDENT SUBQUERY(子查询中的第一个SELECT，依赖于外部查询)
+ 
+ (8) DERIVED(派生表的SELECT, FROM子句的子查询)
+ 
+ (9) UNCACHEABLE SUBQUERY(一个子查询的结果不能被缓存，必须重新评估外链接的第一行)
+ ————————————————
+ 原文链接：https://blog.csdn.net/wudidahuanggua/article/details/125351062
+ 
  
  
  
@@ -889,3 +928,8 @@ create patch  创建补丁
 从提交历史中创建
 在 git 日志中选择要创建补丁的commit，右键选择Create Patch...
 同一个文件在多次commit中都存在，取到的是最新的内容。
+
+
+
+token值
+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
